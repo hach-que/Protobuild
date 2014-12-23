@@ -75,6 +75,7 @@
     <Compile Include="ServicesLibraryNotBuiltWhenNotUsedTest.cs" />
     <Compile Include="ServicesNotDefaultForRootTest.cs" />
     <Compile Include="ServicesRelativeRequireTest.cs" />
+    <Compile Include="SigningKeyWorksTest.cs" />
     <Content Include="TestData\ExampleCocos2DXNA\Build\Module.xml" />
     <Content Include="TestData\ExampleCocos2DXNA\MonoGame\Build\Module.xml" />
     <Content Include="TestData\ExampleCSTools\Build\Module.xml" />
@@ -270,5 +271,8 @@
     <None Include="TestData\ServicesRelativeRequire\Console\Program.cs" />
     <None Include="TestData\ServicesRelativeRequire\Submodule\Build\Projects\Library.definition" />
     <None Include="TestData\ServicesRelativeRequire\Submodule\Library\MyClass.cs" />
+    <None Include="TestData\SigningKeyWorks\Build\Module.xml" />
+    <None Include="TestData\SigningKeyWorks\Build\Projects\Console.definition" />
+    <None Include="TestData\SigningKeyWorks\Console\Program.cs" />
   </Files>
 </Project>

@@ -18,6 +18,7 @@
     {
       return origName.Replace('.','_');
     }
+
     public string GetRelativePath(string from, string to)
     {
       try
@@ -197,6 +198,31 @@
       }
     }
 
+    public bool PackagesignKeyExists()
+    {
+      var home = System.Environment.GetEnvironmentVariable("HOME");
+      if (string.IsNullOrEmpty(home))
+      {
+        home = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
+      }
+      var path = System.IO.Path.Combine(home, ".packagesignkey");
+      return System.IO.File.Exists(path);
+    }
+
+    public string GetPackagesignKey()
+    {
+      var home = System.Environment.GetEnvironmentVariable("HOME");
+      if (string.IsNullOrEmpty(home))
+      {
+        home = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
+      }
+      var path = System.IO.Path.Combine(home, ".packagesignkey");
+      using (var reader = new System.IO.StreamReader(path))
+      {
+        return reader.ReadToEnd().Trim();
+      }
+    }
+
     public string CalculateDefines(string addDefines, string removeDefines)
     {
       var addArray = addDefines.Trim(';').Split(';');
@@ -345,7 +371,7 @@
         <DebugType>full</DebugType>
         <xsl:if test="/Input/Generation/HostPlatform = 'Windows'">
           <!-- This ensures that DirectX errors are reported to the Output window on Windows. -->
-        <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
+          <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
         </xsl:if>
       </xsl:when>
       <xsl:otherwise>
@@ -549,9 +575,30 @@
         </xsl:if>
       </xsl:when>
       <xsl:when test="/Input/Generation/Platform = 'MacOS'">
-        <EnableCodeSigning>False</EnableCodeSigning>
-        <CreatePackage>False</CreatePackage>
-        <EnablePackageSigning>False</EnablePackageSigning>
+        <xsl:choose>
+          <xsl:when test="user:CodesignKeyExists()">
+            <EnableCodeSigning>True</EnableCodeSigning>
+            <CodeSigningKey>
+              <xsl:value-of select="user:GetCodesignKey()" />
+            </CodeSigningKey>
+          </xsl:when>
+          <xsl:otherwise>
+            <EnableCodeSigning>False</EnableCodeSigning>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:choose>
+          <xsl:when test="user:PackagesignKeyExists()">
+            <EnablePackageSigning>True</EnablePackageSigning>
+            <CreatePackage>True</CreatePackage>
+            <PackageSigningKey>
+              <xsl:value-of select="user:GetPackagesignKey()" />
+            </PackageSigningKey>
+          </xsl:when>
+          <xsl:otherwise>
+            <CreatePackage>False</CreatePackage>
+            <EnablePackageSigning>False</EnablePackageSigning>
+          </xsl:otherwise>
+        </xsl:choose>
         <xsl:choose>
           <xsl:when test="user:HasXamarinMac()">
             <xsl:choose>
