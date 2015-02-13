@@ -110,6 +110,8 @@
     <Compile Include="CommandLine\BuildTargetCommand.cs" />
     <Compile Include="CommandLine\CleanCommand.cs" />
     <Compile Include="CommandLine\DebugServiceResolutionCommand.cs" />
+    <Compile Include="CommandLine\CrossPackAttrPackageCommand.cs" />
+    <Compile Include="CommandLine\CrossPackPackageCommand.cs" />
     <Compile Include="CommandLine\DefaultCommand.cs" />
     <Compile Include="CommandLine\DisableServiceCommand.cs" />
     <Compile Include="CommandLine\EnableServiceCommand.cs" />
@@ -218,6 +220,8 @@
     <Compile Include="Packages\AutomaticPackager\IDeduplicator.cs" />
     <Compile Include="Packages\AutomaticPackager\IProjectOutputPathCalculator.cs" />
     <Compile Include="Packages\AutomaticPackager\OutputPathMode.cs" />
+    <Compile Include="Packages\CrossPackager\CrossPackager.cs" />
+    <Compile Include="Packages\CrossPackager\ICrossPackager.cs" />
     <Compile Include="Packages\AutomaticPackager\ProjectOutputPathCalculator.cs" />
     <Compile Include="Packages\GetProtobuildPackageBinaryDelegate.cs" />
     <Compile Include="Packages\GitUtils.cs" />

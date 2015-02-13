@@ -10,6 +10,7 @@ namespace Protobuild
             this.EnabledServices = new List<string>();
             this.DisabledServices = new List<string>();
             this.BuildProperties = new Dictionary<string, string>();
+            this.PackageCrossPackAttributes = new Dictionary<string, string>();
         }
 
         public ICommand CommandToExecute { get; set; }
@@ -61,10 +62,16 @@ namespace Protobuild
         public string PackageRoot { get; set; }
 
         public bool DebugServiceResolution { get; set; }
+        
+        public string PackageSourceFile { get; set; }
 
         public bool DisablePackageResolution { get; set; }
+        
+        public string[] PackageNuGetReferences { get; set; }
 
         public string BuildModuleOrDefinitionName { get; set; }
+        
+        public Dictionary<string, string> PackageCrossPackAttributes { get; set; }
 
         public string BuildTarget { get; set; }
 

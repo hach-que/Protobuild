@@ -78,6 +78,8 @@ namespace Protobuild
                 { "upgrade", kernel.Get<UpgradePackageCommand>() },
                 { "upgrade-all", kernel.Get<UpgradeAllPackagesCommand>() },
                 { "pack", kernel.Get<PackPackageCommand>() },
+                { "cross-pack", kernel.Get<CrossPackPackageCommand>() },
+                { "cross-pack-attr", kernel.Get<CrossPackAttrPackageCommand>() },
                 { "format", kernel.Get<FormatPackageCommand>() },
                 { "push", kernel.Get<PushPackageCommand>() },
                 { "ignore-on-existing", kernel.Get<IgnoreOnExistingPackageCommand>() },

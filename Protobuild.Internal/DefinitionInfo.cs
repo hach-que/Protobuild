@@ -30,6 +30,16 @@ namespace Protobuild
         }
 
         /// <summary>
+        /// Gets or sets the path of the project, relative to the root of the module.
+        /// </summary>
+        /// <value>The project path, relative to the root of the module.</value>
+        public string PathRelativeToModule
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the absolute path of the project.
         /// </summary>
         /// <value>The absolute project path.</value>
@@ -145,6 +155,8 @@ namespace Protobuild
                         doc.Root.Attribute(XName.Get("SkipAutopackage")).Value.ToLowerInvariant();
                     def.SkipAutopackage = skipValue == "true";
                 }
+
+            def.PathRelativeToModule = def.Path;
 
                 if (doc.Root.Attributes().Any(x => x.Name == "PostBuildHook"))
                 {

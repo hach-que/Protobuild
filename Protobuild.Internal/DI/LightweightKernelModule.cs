@@ -66,6 +66,7 @@ namespace Protobuild
             kernel.BindAndKeepInstance<IPackageRedirector, PackageRedirector>();
             kernel.Bind<IPackageLocator, PackageLocator>();
             kernel.Bind<IProjectOutputPathCalculator, ProjectOutputPathCalculator>();
+            kernel.Bind<ICrossPackager, CrossPackager>();
             kernel.Bind<IPackageGlobalTool, PackageGlobalTool>();
             kernel.Bind<IProgressiveWebOperation, ProgressiveWebOperation>();
             kernel.Bind<IPackageCreator, PackageCreator>();
