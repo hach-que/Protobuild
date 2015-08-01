@@ -352,6 +352,11 @@
             C++ projects can not reference C# projects.
           </xsl:message>
         </xsl:when>
+        <xsl:when test="$target_project/@Language = 'F#'">
+          <xsl:message terminate="yes">
+            C++ projects can not reference F# projects.
+          </xsl:message>
+        </xsl:when>
         <xsl:when test="$target_project/@Language = 'C++'">
           <Package IsProject="True">
             <xsl:attribute name="file">

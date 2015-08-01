@@ -121,6 +121,9 @@ EndGlobal
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
+      <xsl:when test="$language = 'F#'">
+        <xsl:text>F2A71F9B-5D33-465A-A702-920D77279786</xsl:text>
+      </xsl:when>
       <xsl:otherwise>
         <xsl:text>FAE04EC0-301F-11D3-BF4B-00C04F79EFBC</xsl:text>
       </xsl:otherwise>

@@ -1187,6 +1187,9 @@
       </xsl:choose>
 
       <ItemGroup>
+        <Reference Include="mscorlib" />
+        <Reference Include="FSharp.Core" />
+      
         <xsl:if test="$project/@Type = 'GTK'">
           <Reference Include="gtk-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
             <SpecificVersion>False</SpecificVersion>
@@ -2067,55 +2070,6 @@
         </xsl:for-each>
       </ItemGroup>
 
-      <xsl:choose>
-        <xsl:when test="/Input/Generation/Platform = 'PCL' or user:IsTrue(/Input/Properties/ForcePCL)">
-          <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-        </xsl:when>
-        <xsl:when test="/Input/Generation/Platform = 'Android' or /Input/Generation/Platform = 'Ouya'">
-          <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-        </xsl:when>
-        <xsl:when test="/Input/Generation/Platform = 'Windows8'">
-          <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
-            <VisualStudioVersion>11.0</VisualStudioVersion>
-          </PropertyGroup>
-          <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-        </xsl:when>
-        <xsl:when test="/Input/Generation/Platform = 'WindowsPhone81'">
-          <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
-            <VisualStudioVersion>12.0</VisualStudioVersion>
-          </PropertyGroup>
-          <PropertyGroup Condition=" '$(TargetPlatformIdentifier)' == '' ">
-            <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
-          </PropertyGroup>
-          <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-        </xsl:when>
-        <xsl:when test="/Input/Generation/Platform = 'WindowsPhone'">
-          <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
-          <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
-          <xsl:if test="user:IsTrue(/Input/Properties/RemoveXnaAssembliesOnWP8)">
-            <Target Name="MonoGame_RemoveXnaAssemblies" AfterTargets="ImplicitlyExpandTargetFramework">
-              <Message Text="MonoGame - Removing XNA Assembly references!" Importance="normal" />
-              <ItemGroup>
-                <ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Microsoft.Xna.Framework.dll'" />
-                <ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Microsoft.Xna.Framework.GamerServices.dll'" />
-                <ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Microsoft.Xna.Framework.GamerServicesExtensions.dll'" />
-                <ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Microsoft.Xna.Framework.Input.Touch.dll'" />
-                <ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Microsoft.Xna.Framework.MediaLibraryExtensions.dll'" />
-              </ItemGroup>
-            </Target>
-          </xsl:if>
-        </xsl:when>
-        <xsl:when test="/Input/Generation/Platform = 'PSMobile'">
-          <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
-        </xsl:when>
-        <xsl:when test="/Input/Generation/Platform = 'iOS' and not(user:IsTrue(/Input/Properties/UseLegacyiOSAPI))">
-          <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-        </xsl:when>
-        <xsl:otherwise>
-          <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-        </xsl:otherwise>
-      </xsl:choose>
-
       <xsl:if test="/Input/Generation/Platform = 'Web'">
         <xsl:if test="$project/@Type = 'App' or $project/@Type = 'Console' or $project/@Type = 'GUI' or $project/@Type = 'GTK'">
 
@@ -2326,6 +2280,23 @@
           </xsl:if>
         </xsl:for-each>
       </ItemGroup>
+      
+      <PropertyGroup>
+        <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
+      </PropertyGroup>
+      <Choose>
+        <When Condition="'$(VisualStudioVersion)' == '11.0'">
+          <PropertyGroup Condition="Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')">
+            <FSharpTargetsPath>$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets</FSharpTargetsPath>
+          </PropertyGroup>
+        </When>
+        <Otherwise>
+          <PropertyGroup Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets')">
+            <FSharpTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets</FSharpTargetsPath>
+          </PropertyGroup>
+        </Otherwise>
+      </Choose>
+      <Import Project="$(FSharpTargetsPath)" />
 
       <xsl:if test="/Input/Properties/MonoDevelopPoliciesFile">
         <ProjectExtensions>

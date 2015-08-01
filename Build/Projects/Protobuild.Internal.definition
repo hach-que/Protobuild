@@ -249,6 +249,9 @@
     <EmbeddedResource Include="BuildResources\GenerateProject.CSharp.xslt.lzma">
       <LogicalName>GenerateProject.CSharp.xslt.lzma</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="BuildResources\GenerateProject.FSharp.xslt.lzma">
+      <LogicalName>GenerateProject.FSharp.xslt.lzma</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="BuildResources\GenerateSolution.xslt.lzma">
       <LogicalName>GenerateSolution.xslt.lzma</LogicalName>
     </EmbeddedResource>
@@ -272,6 +275,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="BuildResources\GenerateProject.CSharp.xslt">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BuildResources\GenerateProject.FSharp.xslt">
       <SubType>Designer</SubType>
     </None>
     <None Include="BuildResources\GenerateSolution.xslt" />

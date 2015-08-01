@@ -1,4 +1,4 @@
-﻿// assembly mscorlib
+// assembly mscorlib
 // assembly System
 // assembly System.Core
 // assembly System.Web
@@ -320,6 +320,12 @@ public class GenerationFunctions
             }
             return ".cproj";
         }
+
+        if (language == "F#")
+        {
+            return ".fsproj";
+        }
+
         return ".csproj";
     }
 

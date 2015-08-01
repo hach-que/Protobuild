@@ -30,7 +30,15 @@ $PROTOBUILD_COMPRESS=".\Protobuild.Compress\bin\$PLATFORM\AnyCPU\Release\Protobu
 if ($LASTEXITCODE -ne 0) {
     exit 1
 }
+& $PROTOBUILD_COMPRESS Protobuild.Internal\BuildResources\GenerateProject.FSharp.xslt Protobuild.Internal\BuildResources\GenerateProject.FSharp.xslt.lzma
+if ($LASTEXITCODE -ne 0) {
+    exit 1
+}
 & $PROTOBUILD_COMPRESS Protobuild.Internal\BuildResources\GenerateProject.CPlusPlus.VisualStudio.xslt Protobuild.Internal\BuildResources\GenerateProject.CPlusPlus.VisualStudio.xslt.lzma
+if ($LASTEXITCODE -ne 0) {
+    exit 1
+}
+& $PROTOBUILD_COMPRESS Protobuild.Internal\BuildResources\GenerateProject.CPlusPlus.MonoDevelop.xslt Protobuild.Internal\BuildResources\GenerateProject.CPlusPlus.MonoDevelop.xslt.lzma
 if ($LASTEXITCODE -ne 0) {
     exit 1
 }

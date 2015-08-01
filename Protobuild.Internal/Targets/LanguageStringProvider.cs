@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Protobuild
 {
@@ -17,6 +17,8 @@ namespace Protobuild
             {
                 case Language.CSharp:
                     return "CSharp";
+                case Language.FSharp:
+                    return "FSharp";
                 case Language.CPlusPlus:
                     if (_hostPlatformDetector.DetectPlatform() == "Windows")
                     {
@@ -37,6 +39,8 @@ namespace Protobuild
             {
                 case Language.CSharp:
                     return "C#";
+                case Language.FSharp:
+                    return "F#";
                 case Language.CPlusPlus:
                     return "C++";
                 default:
@@ -50,6 +54,8 @@ namespace Protobuild
             {
                 case "C#":
                     return Language.CSharp;
+                case "F#":
+                    return Language.FSharp;
                 case "C++":
                     return Language.CPlusPlus;
                 default:
@@ -63,6 +69,8 @@ namespace Protobuild
             {
                 case Language.CSharp:
                     return "csproj";
+                case Language.FSharp:
+                    return "fsproj";
                 case Language.CPlusPlus:
                 if (_hostPlatformDetector.DetectPlatform() == "Windows")
                     {
