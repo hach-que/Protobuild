@@ -1,0 +1,2 @@
+include ^Protobuild.Runtime/bin/%PLATFORM%/AnyCPU/Release/(.*)$
+rewrite ^Protobuild.Runtime/bin/%PLATFORM%/AnyCPU/Release/(.*)$ $1

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Name="Protobuild.Internal" Path="Protobuild.Internal" Type="Library">
+<Project Name="Protobuild.Runtime" Path="Protobuild.Runtime" Type="Console">
   <Properties />
   <References>
     <Reference Include="System" />

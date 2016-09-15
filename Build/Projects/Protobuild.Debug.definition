@@ -4,7 +4,7 @@
   <References>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="Protobuild.Internal" />
+    <Reference Include="Protobuild.Runtime" />
   </References>
   <Files>
     <Compile Include="Program.cs" />
