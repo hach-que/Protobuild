@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Module>
   <Name>Protobuild</Name>
+  <Version>0.0.0-Unversioned</Version>
   <DefaultAction>resync</DefaultAction>
   <DisableSynchronisation>false</DisableSynchronisation>
   <GenerateNuGetRepositories>true</GenerateNuGetRepositories>

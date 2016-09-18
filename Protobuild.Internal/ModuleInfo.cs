@@ -5,10 +5,8 @@ namespace Protobuild
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Reflection;
     using System.Xml.Serialization;
 
     /// <summary>
@@ -39,6 +37,11 @@ namespace Protobuild
         /// </summary>
         /// <value>The module name.</value>
         public string Name { get; set; }
+
+        /// <summary>
+        /// The version of the module.
+        /// </summary>
+        public ModuleVersion Version { get; set; }
 
         /// <summary>
         /// The root path of this module.
@@ -186,6 +189,7 @@ namespace Protobuild
             };
             
             def.Name = getStringValue("Name");
+            def.Version = ModuleVersion.Parse(getStringValue("Version"));
             def.Path = modulePath;
             def.DefaultAction = getStringValue("DefaultAction");
             def.DefaultLinuxPlatforms = getStringValue("DefaultLinuxPlatforms");
