@@ -53,6 +53,15 @@ namespace Protobuild
             var featureManager = kernel.Get<IFeatureManager>();
             featureManager.LoadFeaturesForCurrentDirectory();
 
+            // Perform our self-update and versioning logic.
+            var selfUpdate = kernel.Get<ISelfUpdate>();
+            selfUpdate.EnsureDesiredVersionIsAvailableIfPossible();
+            int relaunchExitCode;
+            if (selfUpdate.RelaunchIfNeeded(args, out relaunchExitCode))
+            {
+                Environment.Exit(relaunchExitCode);
+            }
+
             var commandMappings = new Dictionary<string, ICommand>
             {
                 { "sync", kernel.Get<SyncCommand>() },

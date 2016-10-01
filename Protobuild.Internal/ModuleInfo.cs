@@ -115,6 +115,13 @@ namespace Protobuild
         public Feature[] CachedInternalFeatures { get; set; }
 
         /// <summary>
+        /// Gets or sets the desired Protobuild version to use for this module.  This can be a 
+        /// Git hash, a branch name or a version number.  If this is null or blank, then the module
+        /// has no desired Protobuild version.
+        /// </summary>
+        public string ProtobuildVersion { get; set; }
+
+        /// <summary>
         /// Loads the module information from an XML stream.
         /// </summary>
         /// <param name="xmlStream">The XML stream.</param>

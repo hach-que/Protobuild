@@ -6,6 +6,7 @@ namespace Protobuild
     {
         public static void BindCore(this LightweightKernel kernel)
         {
+            kernel.Bind<ISelfUpdate, SelfUpdate>();
             kernel.Bind<IActionDispatch, ActionDispatch>();
             kernel.Bind<IHostPlatformDetector, HostPlatformDetector>();
             kernel.Bind<ILogger, Logger>();
